@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-
+console.log("📨 sendEmail function called");
 export const sendEmail = async (to, subject, html) => {
   try {
     const transporter = nodemailer.createTransport({

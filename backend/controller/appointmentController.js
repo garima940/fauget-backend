@@ -93,7 +93,7 @@ export const postAppointment = catchAsyncErrors(async (req, res, next) => {
   });
 
   console.log("✅ Appointment saved");
-
+console.log("📧 Trying to send email...");
   // ✅ NON-BLOCKING EMAIL (WILL NOT BREAK API)
   sendEmail(
     email,
