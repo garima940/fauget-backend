@@ -1,0 +1,335 @@
+.contact-hero {
+  height: 350px;
+  background: url("/contact-bg.png") center/cover no-repeat;
+  position: relative;
+}
+
+/* ✅ FIXED OVERLAY */
+.contact-hero .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.15);;
+
+  display: flex;
+  align-items: center;
+  padding-left: 60px;
+}
+
+.hero-text {
+  color: white;
+}
+
+.contact-card {
+  background: #fff;
+  margin: 80px auto 40px;
+  width: 80%;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+/* LIGHT OVERLAY */
+.contact-overlay {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 80px;
+  background: rgba(0,0,0,0.15);
+}
+/* SMALL HERO BOX 🔥 */
+.contact-hero-box {
+  background: rgba(255,255,255,0.8);
+  padding: 20px 25px;
+  border-radius: 10px;
+}
+
+.contact-hero-box h2 {
+  margin: 0;
+}
+.contact-hero-box p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* CONTAINER */
+.contact-container {
+  display: flex;
+  justify-content: center;
+  overflow:visible
+}
+
+/* FLOATING CARD 🔥 */
+.contact-card {
+  width: 80%;
+  background: #fff;
+ margin: -100px auto 40px; /* 🔥 pulls card up over image */
+  padding: 60px 30px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  overflow: visible;
+  position: relative;
+}
+
+/* HEADER */
+.contact-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+}
+.contact-header h3 {
+  margin-left: 80px; /* push text right of logo */
+}
+.logo-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* DETAILS */
+.contact-details {
+  margin-top: 20px;
+}
+
+.contact-details p {
+  margin: 10px 0;
+}
+.contact-logo {
+ position: absolute;
+  top: -30px;
+  
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 6px;
+   box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.contact-icon {
+  color: #e76f51;
+  font-size: 16px;
+}
+
+/* EMAIL GRID 🔥 */
+.contact-email-section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.email-box {
+  flex: 1;
+  display: flex;
+  gap: 10px;
+}
+
+.email-box p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.email-box span {
+  color: #e76f51;
+  font-size: 14px;
+}
+
+/* BOTTOM LINE */
+.contact-email-bottom {
+  margin-top: 20px;
+}
+
+.contact-email-bottom span {
+  color: #e76f51;
+}
+/* DIVIDER */
+hr {
+  margin: 25px 0;
+  border: 0.5px solid #eee;
+}
+.contact-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+/* GET IN TOUCH SECTION */
+.get-in-touch {
+  width: 80%;
+  margin: 40px auto;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  margin: 15px 0;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  background: #f5f5f5;
+  cursor: pointer;
+}
+
+.tabs .active {
+  background: #181514;
+  color: #181616;
+}
+
+/* FORM */
+.touch-form {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.touch-form label {
+  display: block;
+  margin: 12px 0 5px;
+}
+
+.touch-form input,
+.touch-form select,
+.touch-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+/* ROW */
+.form-row {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.form-row input {
+  flex: 1;
+}
+
+/* BUTTON */
+.submit-btn {
+  background: #e8cfc7;
+  color: #000;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.submit-btn:hover {
+  background: #dcbab1;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+/* Container */
+.contact-form {
+  background: #f5f6f8;
+  padding: 40px;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.tab {
+  padding: 10px 20px;
+  border: 1px solid #e5cfc7;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #fff;
+  color: #5b3d3d;
+}
+
+.tab.active {
+  background: #e8cfc7;
+  border-color: #aa08086a;
+}
+
+/* Labels */
+.contact-form label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #5e2323;
+}
+
+.contact-form label span {
+  color: red;
+}
+
+/* Input Fields */
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #f8f9fb;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-color: #260202;
+  background: #fff;
+}
+
+/* Grid Layout */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* 3 column row */
+.form-row-3 {
+  display: grid;
+  grid-template-columns: 100px 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* Full width */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Textarea */
+textarea {
+  min-height: 120px;
+  resize: none;
+}
