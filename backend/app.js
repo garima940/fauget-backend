@@ -11,13 +11,19 @@ const app = express();
 
 // ✅ FIXED CORS
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: [
+    "http://localhost:5173",
+    "https://fauget-app.vercel.app"
+  ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
 
 app.options("*", cors({
-  origin: "http://localhost:5173",
+  origin: [
+    "http://localhost:5173",
+    "https://fauget-app.vercel.app"
+  ],
   credentials: true,
 }));
 
