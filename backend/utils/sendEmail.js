@@ -3,24 +3,24 @@ import nodemailer from "nodemailer";
 export const sendEmail = async (to, subject, message) => {
   try {
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.sendgrid.net",
+      port: 587,
       auth: {
-        user: process.env.SMTP_MAIL,
-        pass: process.env.SMTP_PASSWORD,
+        user: "apikey",
+        pass: process.env.SENDGRID_API_KEY,
       },
     });
 
     const mailOptions = {
-      from: process.env.SMTP_MAIL,
+      from: "garimakashyap2600@gmail.com",
       to,
       subject,
-      html : message, // ✅ FIXED HERE
+      html: message,
     };
 
     await transporter.sendMail(mailOptions);
 
     console.log("✅ Email sent successfully");
-
   } catch (error) {
     console.log("❌ Email error:", error);
   }
