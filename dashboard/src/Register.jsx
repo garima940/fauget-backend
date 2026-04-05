@@ -26,7 +26,7 @@ const Register = () => {
 
   try {
     const res = await axios.post(
-      "http://localhost:5000/api/v1/user/patient/register",
+      "https://fauget-backend-production.up.railway.app/api/v1/user/patient/register",
       form
     );
 

@@ -8,7 +8,7 @@ const Departments = () => {
     const fetchDoctors = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/v1/user/doctors"
+          "https://fauget-backend-production.up.railway.app/api/v1/user/doctors"
         );
         setDoctors(res.data.doctors);
       } catch (error) {

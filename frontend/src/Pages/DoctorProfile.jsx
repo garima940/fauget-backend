@@ -12,7 +12,7 @@ const DoctorProfile = () => {
     const fetchDoctor = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/v1/user/doctors"
+          "https://fauget-backend-production.up.railway.app/api/v1/user/doctors"
         );
 
         const foundDoctor = res.data.doctors.find(

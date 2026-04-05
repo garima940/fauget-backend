@@ -27,7 +27,7 @@ const HospitalDetails = () => {
         console.log("Fetching doctors for:", decodedName);
 
         const { data } = await axios.get(
-          `http://localhost:5000/api/v1/user/doctors/hospital/${encodeURIComponent(decodedName)}`
+          `https://fauget-backend-production.up.railway.app/api/v1/user/doctors/hospital/${encodeURIComponent(decodedName)}`
         );
 
         setDoctors(data.doctors || []);

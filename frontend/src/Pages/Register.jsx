@@ -70,7 +70,7 @@ else if (!/^\d{13}$/.test(form.nic))
 
     try {
       await axios.post(
-        "http://localhost:5000/api/v1/user/patient/register",
+        "https://fauget-backend-production.up.railway.app/api/v1/user/patient/register",
          currentForm   // ⭐ USE THIS
       );
 

@@ -20,7 +20,7 @@ const handleClick = (dept) => {
 
   // ✅ FETCH HOSPITALS FROM BACKEND
 useEffect(() => {
- fetch(`http://localhost:5000/api/v1/hospitals/${activeState}`)
+ fetch(`https://fauget-backend-production.up.railway.app/api/v1/hospitals/${activeState}`)
     .then((res) => res.json())
     .then((data) => {
       setHospitals(data); // ✅ direct array
@@ -54,7 +54,7 @@ useEffect(() => {
 
 const handleLogout = async () => {
   try {
-    await axios.get("http://localhost:5000/api/v1/user/patient/logout");
+    await axios.get("https://fauget-backend-production.up.railway.app/api/v1/user/patient/logout");
 
     localStorage.removeItem("token");
     localStorage.removeItem("user");

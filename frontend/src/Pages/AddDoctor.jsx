@@ -23,7 +23,7 @@ const AddDoctor = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/user/doctor/addnew",
+        "https://fauget-backend-production.up.railway.app/api/v1/user/doctor/addnew",
         form,
         { withCredentials: true }
       );

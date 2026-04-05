@@ -33,7 +33,7 @@ const SpecialityPage = () => {
       speciality.charAt(0).toUpperCase() + speciality.slice(1);
 
     fetch(
-      `http://localhost:5000/api/v1/user/doctors/department/${formattedSpeciality}`
+      `https://fauget-backend-production.up.railway.app/api/v1/user/doctors/department/${formattedSpeciality}`
     )
       .then((res) => res.json())
       .then((data) => {

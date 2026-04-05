@@ -72,7 +72,7 @@ const handleSubmit = async (e) => {
     console.log("SENDING DATA:", payload); // ✅ DEBUG
 
     const { data } = await axios.post(
-      "http://localhost:5000/api/v1/feedback/send",
+      "https://fauget-backend-production.up.railway.app/api/v1/feedback/send",
       payload,
       {
         headers: {

@@ -35,7 +35,7 @@ const App = () => {
       if (!token) return;
 
       const res = await axios.get(
-        "http://localhost:5000/api/v1/user/patient/me",
+        "https://fauget-backend-production.up.railway.app/api/v1/user/patient/me",
         {
           headers: {
             Authorization: `Bearer ${token}`,

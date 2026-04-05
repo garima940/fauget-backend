@@ -25,7 +25,7 @@ const DoctorsList = ({ doctors: propDoctors }) => {
       const fetchDoctors = async () => {
         try {
           const { data } = await axios.get(
-            "http://localhost:5000/api/v1/user/doctors"
+            "https://fauget-backend-production.up.railway.app/api/v1/user/doctors"
           );
           setDoctors(data.doctors);
         } catch (error) {

@@ -9,7 +9,7 @@ const HospitalList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/hospitals/Delhi") // you can change state
+    fetch("https://fauget-backend-production.up.railway.app/api/v1/hospitals/Delhi") // you can change state
       .then((res) => res.json())
       .then((data) => setHospitals(data))
       .catch((err) => console.log(err));
