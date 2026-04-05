@@ -23,6 +23,12 @@ app.get("/test", (req, res) => {
 app.get("/api/v1/user/test", (req, res) => {
   res.send("User route working");
 });
+// ✅ ADD THIS
+app.get("/", (req, res) => {
+  res.send("Backend is running 🚀");
+});
+
+
 
 // ✅ START SERVER
 const PORT = process.env.PORT || 5000;
