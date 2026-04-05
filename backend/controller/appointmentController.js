@@ -1,12 +1,13 @@
-
-
 import { sendEmail } from "../utils/sendEmail.js";
 import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/error.js";
 import { Appointment } from "../models/appointmentSchema.js";
 import { User } from "../models/userSchema.js";
 
+// ✅ CREATE APPOINTMENT
 export const postAppointment = catchAsyncErrors(async (req, res, next) => {
+  console.log("📥 Incoming Data:", req.body);
+
   const {
     firstName,
     lastName,
@@ -22,6 +23,8 @@ export const postAppointment = catchAsyncErrors(async (req, res, next) => {
     hasVisited,
     address,
   } = req.body;
+
+  // ✅ VALIDATION
   if (
     !firstName ||
     !lastName ||
@@ -38,28 +41,36 @@ export const postAppointment = catchAsyncErrors(async (req, res, next) => {
   ) {
     return next(new ErrorHandler("Please Fill Full Form!", 400));
   }
-  const isConflict = await User.find({
+
+  // ✅ FIND DOCTOR
+  const doctors = await User.find({
     firstName: doctor_firstName,
     lastName: doctor_lastName,
     role: "Doctor",
     doctorDepartment: department,
   });
-  if (isConflict.length === 0) {
+
+  if (doctors.length === 0) {
     return next(new ErrorHandler("Doctor not found", 404));
   }
 
-  if (isConflict.length > 1) {
+  if (doctors.length > 1) {
     return next(
       new ErrorHandler(
-        "Doctors Conflict! Please Contact Through Email Or Phone!",
+        "Doctors Conflict! Please Contact Support!",
         400
       )
     );
   }
-  const doctorId = isConflict[0]._id;
-  const patientId = req.user._id;
-const appointmentId = "APT" + Date.now();
 
+  const doctorId = doctors[0]._id;
+
+  // ⚠️ SAFE USER CHECK
+  const patientId = req.user ? req.user._id : null;
+
+  const appointmentId = "APT" + Date.now();
+
+  // ✅ CREATE APPOINTMENT
   const appointment = await Appointment.create({
     firstName,
     lastName,
@@ -81,87 +92,89 @@ const appointmentId = "APT" + Date.now();
     appointmentId,
   });
 
- // ✅ 🔥 ADD EMAIL HERE
-/** */
+  console.log("✅ Appointment saved");
 
- try {
-    await sendEmail(
-      email,
-      "Appointment Confirmation",
-      `
-      <div style="font-family: Arial; padding: 20px; border: 1px solid #ddd; border-radius: 10px; max-width: 500px; margin: auto;">
-        
-        <h2 style="color: #2c3e50; text-align: center;">
-          Fauget Hospital
-        </h2>
-        
-        <h3 style="color: green; text-align: center;">
-          Appointment Confirmed
-        </h3>
+  // ✅ NON-BLOCKING EMAIL (WILL NOT BREAK API)
+  sendEmail(
+    email,
+    "Appointment Confirmation",
+    `
+    <div style="font-family: Arial; padding: 20px;">
+      <h2>Fauget Hospital</h2>
+      <h3 style="color: green;">Appointment Confirmed</h3>
 
-        <p><strong>Appointment ID:</strong> ${appointmentId}</p>
-        <p><strong>Patient:</strong> ${firstName} ${lastName}</p>
-        <p><strong>Doctor:</strong> ${doctor_firstName} ${doctor_lastName}</p>
-        <p><strong>Date:</strong> ${appointment_date}</p>
-        <p><strong>Department:</strong> ${department}</p>
+      <p><b>Appointment ID:</b> ${appointmentId}</p>
+      <p><b>Patient:</b> ${firstName} ${lastName}</p>
+      <p><b>Doctor:</b> ${doctor_firstName} ${doctor_lastName}</p>
+      <p><b>Date:</b> ${appointment_date}</p>
+      <p><b>Department:</b> ${department}</p>
 
-        <hr/>
+      <hr/>
+      <p>Please arrive 10 minutes early.</p>
+    </div>
+    `
+  ).catch((err) => {
+    console.log("❌ Email failed:", err.message);
+  });
 
-        <p style="color: #555; text-align: center;">
-          Please arrive 10 minutes early.<br/>
-          Thank you for choosing us.
-        </p>
-
-      </div>
-      `
-    );
-
-    console.log("✅ Email sent successfully");
-
-  } catch (error) {
-    console.log("❌ Email failed but appointment saved:", error);
-  }
-
-  // 🔹 Response
-  res.status(200).json({
+  // ✅ ALWAYS RETURN RESPONSE (IMPORTANT)
+  return res.status(200).json({
     success: true,
+    message: "Appointment booked successfully",
     appointment,
-    message: "Appointment Sent!",
   });
 });
+
+
+// ✅ GET ALL APPOINTMENTS
 export const getAllAppointments = catchAsyncErrors(async (req, res, next) => {
   const appointments = await Appointment.find();
-  res.status(200).json({
+
+  return res.status(200).json({
     success: true,
     appointments,
   });
 });
+
+
+// ✅ UPDATE APPOINTMENT STATUS
 export const updateAppointmentStatus = catchAsyncErrors(
   async (req, res, next) => {
     const { id } = req.params;
+
     let appointment = await Appointment.findById(id);
+
     if (!appointment) {
       return next(new ErrorHandler("Appointment not found!", 404));
     }
+
     appointment = await Appointment.findByIdAndUpdate(id, req.body, {
       new: true,
       runValidators: true,
-      useFindAndModify: false,
     });
-    res.status(200).json({
+
+    return res.status(200).json({
       success: true,
       message: "Appointment Status Updated!",
+      appointment,
     });
   }
 );
+
+
+// ✅ DELETE APPOINTMENT
 export const deleteAppointment = catchAsyncErrors(async (req, res, next) => {
   const { id } = req.params;
+
   const appointment = await Appointment.findById(id);
+
   if (!appointment) {
     return next(new ErrorHandler("Appointment Not Found!", 404));
   }
+
   await appointment.deleteOne();
-  res.status(200).json({
+
+  return res.status(200).json({
     success: true,
     message: "Appointment Deleted!",
   });
