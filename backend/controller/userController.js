@@ -340,10 +340,21 @@ export const addNewDoctor = catchAsyncErrors(async (req, res, next) => {
 });
 
 /* ================= OTHERS ================= */
-export const getAllDoctors = catchAsyncErrors(async (req, res, next) => {
-  const doctors = await User.find({ role: "Doctor" });
-  res.status(200).json({ success: true, doctors });
-});
+export const getAllDoctors = async (req, res) => {
+  try {
+    const doctors = await User.find();
+
+    console.log("ALL USERS:", doctors);
+
+    res.status(200).json({
+      success: true,
+      doctors
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const getUserDetails = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({ success: true, user: req.user });
