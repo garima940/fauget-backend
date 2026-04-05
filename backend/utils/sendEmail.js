@@ -1,33 +1,25 @@
-import nodemailer from "nodemailer";
+import sgMail from "@sendgrid/mail";
 
-
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export const sendEmail = async (to, subject, html) => {
-  console.log("📨 sendEmail function called");
   try {
-    const transporter = nodemailer.createTransport({
-      host: "smtp.sendgrid.net",
-      port: 587,
-      auth: {
-        user: "apikey", // required by SendGrid
-        pass: process.env.SENDGRID_API_KEY,
-      },
-    });
+    console.log("📨 sendEmail function called");
 
-    const mailOptions = {
-      from: `"Fauget Hospital" <garimakashyap2600@gmail.com>`, // verified sender
+    const msg = {
       to,
+      from: "garimakashyap2600@gmail.com", // must be verified
       subject,
       html,
     };
 
-    const info = await transporter.sendMail(mailOptions);
+    const response = await sgMail.send(msg);
 
-    console.log("✅ Email sent:", info.messageId);
+    console.log("✅ SendGrid response:", response[0].statusCode);
 
     return true;
   } catch (error) {
-    console.log("❌ SendGrid Error:", error.message);
-    return false; // don't throw → prevents crash
+    console.log("❌ SendGrid Error:", error.response?.body || error.message);
+    return false;
   }
 };
