@@ -1,6 +1,9 @@
 import nodemailer from "nodemailer";
-console.log("📨 sendEmail function called");
+
+
+
 export const sendEmail = async (to, subject, html) => {
+  console.log("📨 sendEmail function called");
   try {
     const transporter = nodemailer.createTransport({
       host: "smtp.sendgrid.net",
