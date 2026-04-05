@@ -1,13 +1,12 @@
 import nodemailer from "nodemailer";
 
-export const sendEmail = async (to, subject, message) => {
+export const sendEmail = async (to, subject, html) => {
   try {
     const transporter = nodemailer.createTransport({
-      host: "smtp.sendgrid.net",
-      port: 587,
+      service: "gmail",
       auth: {
-        user: "apikey",
-        pass: process.env.SENDGRID_API_KEY,
+        user: "garimakashyap2600@gmail.com",
+        pass: "eusyqjosasusixou", // ⚠️ paste app password here
       },
     });
 
@@ -15,13 +14,13 @@ export const sendEmail = async (to, subject, message) => {
       from: "garimakashyap2600@gmail.com",
       to,
       subject,
-      html: message,
+      html, // ✅ FIXED
     };
 
     await transporter.sendMail(mailOptions);
 
     console.log("✅ Email sent successfully");
   } catch (error) {
-    console.log("❌ Email error:", error);
+    console.log("❌ Email error:", error.message);
   }
 };
