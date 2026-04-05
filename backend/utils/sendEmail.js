@@ -3,24 +3,28 @@ import nodemailer from "nodemailer";
 export const sendEmail = async (to, subject, html) => {
   try {
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.sendgrid.net",
+      port: 587,
       auth: {
-        user: "garimakashyap2600@gmail.com",
-        pass: "eusyqjosasusixou", // ⚠️ paste app password here
+        user: "apikey", // required by SendGrid
+        pass: process.env.SENDGRID_API_KEY,
       },
     });
 
     const mailOptions = {
-      from: "garimakashyap2600@gmail.com",
+      from: `"Fauget Hospital" <garimakashyap2600@gmail.com>`, // verified sender
       to,
       subject,
-      html, // ✅ FIXED
+      html,
     };
 
-    await transporter.sendMail(mailOptions);
+    const info = await transporter.sendMail(mailOptions);
 
-    console.log("✅ Email sent successfully");
+    console.log("✅ Email sent:", info.messageId);
+
+    return true;
   } catch (error) {
-    console.log("❌ Email error:", error.message);
+    console.log("❌ SendGrid Error:", error.message);
+    return false; // don't throw → prevents crash
   }
 };
