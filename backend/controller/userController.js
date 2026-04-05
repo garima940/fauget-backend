@@ -342,13 +342,11 @@ export const addNewDoctor = catchAsyncErrors(async (req, res, next) => {
 /* ================= OTHERS ================= */
 export const getAllDoctors = async (req, res) => {
   try {
-    const doctors = await User.find();
-
-    console.log("ALL USERS:", doctors);
+    const doctors = await User.find({ role: "Doctor" });
 
     res.status(200).json({
       success: true,
-      doctors
+      doctors,
     });
 
   } catch (error) {
