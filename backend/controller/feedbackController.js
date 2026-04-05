@@ -7,7 +7,7 @@ export const sendFeedback = async (req, res) => {
 
     const { type, firstName, lastName, phone, email, hospital, message } = req.body;
 
-    if (!type || !firstName || !lastName || !phone || !email || !hospital || !message) {
+    if (!type || !firstName || !lastName || !phone || !email || !hospital ) {
       return res.status(400).json({
         success: false,
         message: "All fields are required",
@@ -21,7 +21,7 @@ export const sendFeedback = async (req, res) => {
       phone,
       email,
       hospital,
-      message,
+      message: message || "No message provided",
     });
 
     // ✅ ALSO ADD THIS (VERY IMPORTANT)
