@@ -82,72 +82,53 @@ const appointmentId = "APT" + Date.now();
   });
 
  // ✅ 🔥 ADD EMAIL HERE
- await sendEmail(
-  email,
-  "Appointment Confirmation",
-  `
-  <div style="font-family: Arial; padding: 20px; border: 1px solid #ddd; border-radius: 10px; max-width: 500px; margin: auto;">
-    
-    <h2 style="color: #2c3e50; text-align: center;">
-      Fauget Hospital
-    </h2>
-    
-    <h3 style="color: green; text-align: center;">
-      Appointment Confirmed
-    </h3>
-
-    <p>
-      <img src="https://img.icons8.com/ios-filled/20/000000/ticket.png"/>
-      <strong> Appointment ID:</strong> ${appointmentId}
-    </p>
-
-    <p>
-      <img src="https://img.icons8.com/ios-filled/20/000000/user.png"/>
-      <strong> Patient:</strong> ${firstName} ${lastName}
-    </p>
-
-    <p>
-      <img src="https://img.icons8.com/ios-filled/20/000000/stethoscope.png"/>
-      <strong> Doctor:</strong> ${doctor_firstName} ${doctor_lastName}
-    </p>
-
-    <p>
-      <img src="https://img.icons8.com/ios-filled/20/000000/calendar.png"/>
-      <strong> Date:</strong> ${appointment_date}
-    </p>
-
-    <p>
-      <img src="https://img.icons8.com/ios-filled/20/000000/hospital.png"/>
-      <strong> Department:</strong> ${department}
-    </p>
-
-    <hr/>
-
-    <p style="color: #555; text-align: center;">
-      Please arrive 10 minutes early.<br/>
-      Thank you for choosing us.
-    </p>
-
-  </div>
-  `
-);
 
 
+ try {
+    await sendEmail(
+      email,
+      "Appointment Confirmation",
+      `
+      <div style="font-family: Arial; padding: 20px; border: 1px solid #ddd; border-radius: 10px; max-width: 500px; margin: auto;">
+        
+        <h2 style="color: #2c3e50; text-align: center;">
+          Fauget Hospital
+        </h2>
+        
+        <h3 style="color: green; text-align: center;">
+          Appointment Confirmed
+        </h3>
 
+        <p><strong>Appointment ID:</strong> ${appointmentId}</p>
+        <p><strong>Patient:</strong> ${firstName} ${lastName}</p>
+        <p><strong>Doctor:</strong> ${doctor_firstName} ${doctor_lastName}</p>
+        <p><strong>Date:</strong> ${appointment_date}</p>
+        <p><strong>Department:</strong> ${department}</p>
 
+        <hr/>
 
+        <p style="color: #555; text-align: center;">
+          Please arrive 10 minutes early.<br/>
+          Thank you for choosing us.
+        </p>
 
+      </div>
+      `
+    );
 
+    console.log("✅ Email sent successfully");
 
-  
+  } catch (error) {
+    console.log("❌ Email failed but appointment saved:", error);
+  }
+
+  // 🔹 Response
   res.status(200).json({
     success: true,
     appointment,
-    message: "Appointment Send!",
+    message: "Appointment Sent!",
   });
-
 });
-
 export const getAllAppointments = catchAsyncErrors(async (req, res, next) => {
   const appointments = await Appointment.find();
   res.status(200).json({
